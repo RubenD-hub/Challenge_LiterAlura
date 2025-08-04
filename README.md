@@ -1,8 +1,9 @@
 <a name="readme-top"></a>
 
+<!--suppress HtmlUnknownAnchorTarget, HtmlDeprecatedAttribute -->
 <br>
 <div align="center">
-  <img src="img/" alt="Logo" width="200">
+  <img src="img/Logo.png" alt="Logo" width="200">
 
 ![Alura]
   <h1>📚Challenge: LiterAlura 📚➡💻</h1> 
@@ -18,14 +19,12 @@
 <summary>Indice</summary>
 
 - [🤔Acerca del proyecto](#acerca-del-proyecto)
-- [👷‍♂️Construido con:](#️construido-con)
+- [👷‍♂️Construido con:](#construido-con)
 - [🛠Cómo empezar.](#cómo-empezar)
     - [📜Requisitos](#requisitos)
     - [🔢 Pasos](#-pasos)
 - [🛶Funcionamiento](#funcionamiento)
     - [✅ Menu principal](#-menu-principal)
-        - [🔀 Convertir moneda](#-convertir-moneda)
-        - [🔙 Historial de conversiones](#-historial-de-conversiones)
         - [❌ Salir](#-salir)
     - [🚓Excepciones y contramedidas](#excepciones-y-contramedidas)
 - [Roadmap](#roadmap)
@@ -98,12 +97,9 @@ En el siguiente GIF podemos ver el funcionamiento principal de la apliccaion.
 
 ### ✅ Menu principal
 
-Al ejecutar la aplicacion, lo primero que podemos encontrar es un menu principal con  opciones.
+Al ejecutar la aplicacion, lo primero que podemos encontrar es un menu principal con opciones.
 
-<img src="img/img1.PNG" alt="Menu principal" width="300">
- 
-
-<img src="img/img2.PNG" alt="Menu principal" width="300">
+<img src="img/" alt="Menu principal" width="300">
 
 #### ❌ Salir
 
