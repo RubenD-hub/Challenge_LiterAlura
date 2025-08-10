@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface AutorRepository extends JpaRepository<AutorT, Long> {
 
+    // 🔹 Evalua si existe el autor registrado en la DB con ese nombre
     Optional<AutorT> findByNombre(String nombre);
 
     // 🔹 Si quieres traer todos los autores con sus libros
