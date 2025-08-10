@@ -75,4 +75,10 @@ public class LibroService {
         System.out.println("\t\t✅ Libro guardado correctamente");
         System.out.println(PrintUtil.imprimirLibro(libroT));
     }
+
+    @Transactional
+    public void MostrarLibrosGuardados() {
+        libroRepository.findAllConAutores()
+                .forEach(libroT -> System.out.println(PrintUtil.imprimirLibro(libroT)));
+    }
 }

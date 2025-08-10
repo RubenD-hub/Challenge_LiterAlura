@@ -45,6 +45,12 @@ public class Principal {
                 case 1:
                     libroService.buscarLibroPorTitulo();
                     break;
+                case 2:
+                    libroService.MostrarLibrosGuardados();
+                    break;
+                case 3:
+                    autorService.MostrarAutoresGuardados();
+                    break;
             }
 
             //  Rompe el bucle por seleccionar la opción salir
