@@ -51,6 +51,9 @@ public class Principal {
                 case 3:
                     autorService.MostrarAutoresGuardados();
                     break;
+                case 4:
+                    autorService.AutoresVivosYear();
+                    break;
             }
 
             //  Rompe el bucle por seleccionar la opción salir

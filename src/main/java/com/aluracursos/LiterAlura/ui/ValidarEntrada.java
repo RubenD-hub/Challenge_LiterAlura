@@ -20,7 +20,20 @@ public class ValidarEntrada {
                 // Devuelve la respuesta correspondiente
                 return opc;
             } catch (InputMismatchException e) {
-                System.out.println("\t¡¡Error: debe ingresar un número!!\n\tVuelva a intentarlo.");
+                System.out.println("\t¡¡Error: debe ingresar un número Entero!!\n\tVuelva a intentarlo.");
+                scan.nextLine(); // Limpiar el buffer
+            }
+        }
+    }
+
+    //  M. - Válida que la opcion ingresada sea correcta
+    public int ValidarNumeroEntero(String msg) {
+        while (true) {
+            System.out.print(msg);
+            try {
+                return scan.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("\t¡¡Error: debe ingresar un número ENTERO!!\n\tVuelva a intentarlo.");
                 scan.nextLine(); // Limpiar el buffer
             }
         }
