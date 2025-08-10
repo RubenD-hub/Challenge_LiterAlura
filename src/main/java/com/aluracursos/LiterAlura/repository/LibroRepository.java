@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface LibroRepository extends JpaRepository<LibroT,Long> {
 
-    // 🔹 Evalua si existe el libro registrado en DB con ese idGutendex
+    // 🔹 Evalua sí existe el libro registrado en DB con ese idGutendex
     Optional<LibroT> findByIdGutendex(String idGutendex);
 
     // 🔹 Si quieres traer todos los libros con sus autores
