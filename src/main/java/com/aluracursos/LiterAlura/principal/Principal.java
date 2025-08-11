@@ -54,6 +54,9 @@ public class Principal {
                 case 4:
                     autorService.AutoresVivosYear();
                     break;
+                case 5:
+                    libroService.ListarLibrosPorIdioma();
+                    break;
             }
 
             //  Rompe el bucle por seleccionar la opción salir

@@ -92,4 +92,33 @@ public class LibroService {
         }
         librosGuardados.forEach(libroT -> System.out.println(PrintUtil.imprimirLibro(libroT)));
     }
+
+    //  M. - Lista los libros existentes de la DB po idioma
+    @Transactional
+    public void ListarLibrosPorIdioma() {
+        List<String> idiomas = libroRepository.findAllIdiomas();
+
+        if (idiomas.isEmpty()) {
+            System.out.println(ROJO + "\t\t❗❗ Aún no hay idiomas registrados.\n\t\t🧐 Ingrese un primer libro👍👍");
+            return;
+        }
+
+        System.out.println("\n\t🌎 Idiomas disponibles:");
+        for (int i = 0; i < idiomas.size(); i++) {
+            System.out.printf(AMARILLO + "\t\t%d) " + MAGENTA
+                    + IdiomaUtil.obtenerBanderaPorIdioma(idiomas.get(i))+ "\n", i + 1);
+        }
+
+        String msg = AMARILLO + "\t\tSeleccione un idioma: ";
+        int opcion = validarEntrada.OpcionAValidar(msg, idiomas.size());
+        String idiomaSeleccionado = idiomas.get(opcion - 1);
+        List<LibroT> libros = libroRepository.findLibrosByIdioma(idiomaSeleccionado);
+
+        System.out.printf(AMARILLO + "\n\t\t📚 Libros en "
+                + VERDE + IdiomaUtil.obtenerBanderaPorIdioma(idiomaSeleccionado)
+                + AMARILLO + ":\n");
+        libros.forEach(libro ->
+                System.out.println( VERDE + "\t\t - " + RESET + libro.getTitulo())
+        );
+    }
 }
