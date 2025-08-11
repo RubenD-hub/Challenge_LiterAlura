@@ -9,11 +9,14 @@ public class Menu {
 
     //  Variables
     private final String[] menu_inicio = {
-            "Buscar libro por título",
-            "Listar libros registrados",
-            "Listar autores registrados",
-            "Listar autores vivos en un determinado año",
-            "Listar libros por idioma",
+            "Buscar libro por título en API",
+            "Listar libros registrados en DB",
+            "Buscar autor por nombre en DB",
+            "Listar autores registrados en DB",
+            "Listar autores vivos en un determinado año en DB",
+            "Listar libros por idioma en DB",
+            "Top 10 libros más descargados",
+            "Generando estadísticas por idioma en DB",
             "Salir"};
 
     //  Metodos

@@ -7,6 +7,7 @@ import com.aluracursos.LiterAlura.util.PrintUtil;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import static com.aluracursos.LiterAlura.util.StyleAnsi.*;
@@ -38,7 +39,7 @@ public class AutorService {
 
     //  M. - Lista los autores vivos en cierto año
     @Transactional
-    public void AutoresVivosYear(){
+    public void AutoresVivosYear() {
         autoresGuardados = autorRepository.findAllConLibros();
         if (autoresGuardados.isEmpty()) {
             System.out.println(ROJO + "\t\t❗❗ Aún no hay autores registrados.\n\t\t🧐 Ingrese un primer libro👍👍");
@@ -48,5 +49,19 @@ public class AutorService {
         int year = validarEntrada.ValidarNumeroEntero(msg);
         autorRepository.AutoresVivosYear(year)
                 .forEach(AutorT -> System.out.println(PrintUtil.imprimirAutor(AutorT)));
+    }
+
+    public void buscarAutorPorNombre() {
+        System.out.print(AMARILLO+"\tIngrese el nombre del autor a buscar: ");
+        var nombreAutor = scan.nextLine();
+
+        List<AutorT> autorEncontrado = autorRepository.autorPorNombre(nombreAutor);
+
+        if (autorEncontrado.isEmpty()) {
+            System.out.println(ROJO + "\t\t❌ No se encontró ningún autor con ese nombre en la base de datos.");
+            return;
+        }
+
+        autorEncontrado.forEach(AutorT -> System.out.println(PrintUtil.imprimirAutor(AutorT)));
     }
 }

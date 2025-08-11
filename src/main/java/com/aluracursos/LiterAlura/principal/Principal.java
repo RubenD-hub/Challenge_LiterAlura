@@ -49,18 +49,21 @@ public class Principal {
                     libroService.MostrarLibrosGuardados();
                     break;
                 case 3:
-                    autorService.MostrarAutoresGuardados();
+                    autorService.buscarAutorPorNombre();
                     break;
                 case 4:
-                    autorService.AutoresVivosYear();
+                    autorService.MostrarAutoresGuardados();
                     break;
                 case 5:
+                    autorService.AutoresVivosYear();
+                    break;
+                case 6:
                     libroService.ListarLibrosPorIdioma();
                     break;
             }
 
             //  Rompe el bucle por seleccionar la opción salir
-            if (opc == 6) {
+            if (opc == 9) {
                 break;
             }
         }

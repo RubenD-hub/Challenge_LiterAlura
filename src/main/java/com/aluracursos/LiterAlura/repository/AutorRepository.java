@@ -19,4 +19,8 @@ public interface AutorRepository extends JpaRepository<AutorT, Long> {
     // 🔹 Si quieres traer todos los autores vivos en ese determinado año
     @Query("SELECT DISTINCT a FROM AutorT a LEFT JOIN FETCH a.libros WHERE a.fechaDeNacimiento <= :year AND a.fechaDeMuerte >=:year")
     List<AutorT> AutoresVivosYear(int year);
+
+    // 🔹 Si quieres traer todos los autores con el nombre buscado
+    @Query("SELECT DISTINCT a FROM AutorT a LEFT JOIN FETCH a.libros WHERE a.nombre ILIKE %:nombreAutor%")
+    List<AutorT> autorPorNombre(String nombreAutor);
 }
