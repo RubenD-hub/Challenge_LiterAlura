@@ -23,7 +23,10 @@ public class LibroT {
             inverseJoinColumns = @JoinColumn(name = "autor_id")
     )
     private Set<AutorT> autor = new HashSet<>();
-    private List<String> idiomas;
+    @ElementCollection
+    @CollectionTable(name = "libro_idiomas", joinColumns = @JoinColumn(name = "libro_id"))
+    @Column(name = "idioma")
+    private Set<String> idiomas = new HashSet<>();
     private Double numeroDeDescarga;
 
     public LibroT() {
@@ -32,7 +35,7 @@ public class LibroT {
     public LibroT(LibroRes libroRes) {
         this.idGutendex = libroRes.idGutendex();
         this.titulo = libroRes.titulo();
-        this.idiomas = libroRes.idiomas();
+        this.idiomas = new HashSet<>(libroRes.idiomas());
         this.numeroDeDescarga = OptionalDouble.of(libroRes.numeroDeDescargas()).orElse(0);
     }
 
@@ -44,8 +47,8 @@ public class LibroT {
     public void setIdGutendex(String idGutendex) { this.idGutendex = idGutendex; }
     public Double getNumeroDeDescarga() { return numeroDeDescarga; }
     public void setNumeroDeDescarga(Double numeroDeDescarga) { this.numeroDeDescarga = numeroDeDescarga; }
-    public List<String> getIdiomas() { return idiomas; }
-    public void setIdiomas(List<String> idiomas) { this.idiomas = idiomas; }
+    public Set<String> getIdiomas() { return idiomas; }
+    public void setIdiomas(Set<String> idiomas) { this.idiomas = idiomas; }
     public Set<AutorT> getAutor() { return autor; }
     public void setAutor(Set<AutorT> autor) { this.autor = autor; }
     public String getTitulo() { return titulo; }
