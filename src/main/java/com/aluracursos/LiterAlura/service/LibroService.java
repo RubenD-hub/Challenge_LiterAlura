@@ -5,6 +5,8 @@ import com.aluracursos.LiterAlura.repository.AutorRepository;
 import com.aluracursos.LiterAlura.repository.LibroRepository;
 import com.aluracursos.LiterAlura.service.api.ConsumoAPI;
 import com.aluracursos.LiterAlura.service.api.ConvierteDatos;
+import com.aluracursos.LiterAlura.ui.ValidarEntrada;
+import com.aluracursos.LiterAlura.util.IdiomaUtil;
 import com.aluracursos.LiterAlura.util.PrintUtil;
 import jakarta.transaction.Transactional;
 
@@ -20,6 +22,10 @@ public class LibroService {
     private final ConvierteDatos conversor;
     private final LibroRepository libroRepository;
     private final AutorRepository autorRepository;
+    private final ValidarEntrada validarEntrada = new ValidarEntrada();
+
+    //  Variables
+    List<LibroT> librosGuardados;
 
     //  Constructor
     public LibroService(ConsumoAPI consumoAPI, ConvierteDatos conversor, LibroRepository repository, AutorRepository autorRepository) {
@@ -48,7 +54,7 @@ public class LibroService {
     }
 
     //  M. - Guarda el libro encontrado en la base de datos, además de guardar y hacer la relacion de sus autores
-    private void GuardarLibro(LibroRes libroRes){
+    private void GuardarLibro(LibroRes libroRes) {
         // Buscar si ya existe por ID Gutendex
         Optional<LibroT> libroExistente = libroRepository.findByIdGutendex(libroRes.idGutendex());
 
@@ -76,9 +82,14 @@ public class LibroService {
         System.out.println(PrintUtil.imprimirLibro(libroT));
     }
 
+    //  M. - Muestra la lista de libros guardados en la DB
     @Transactional
     public void MostrarLibrosGuardados() {
-        libroRepository.findAllConAutores()
-                .forEach(libroT -> System.out.println(PrintUtil.imprimirLibro(libroT)));
+        librosGuardados = libroRepository.findAllConAutores();
+        if (librosGuardados.isEmpty()) {
+            System.out.println(ROJO + "\t\t❗❗ Aún no hay libros registrados.\n\t\t🧐 Ingrese un primer libro👍👍");
+            return;
+        }
+        librosGuardados.forEach(libroT -> System.out.println(PrintUtil.imprimirLibro(libroT)));
     }
 }
