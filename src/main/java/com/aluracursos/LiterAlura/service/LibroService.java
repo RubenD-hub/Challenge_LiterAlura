@@ -8,9 +8,10 @@ import com.aluracursos.LiterAlura.service.api.ConvierteDatos;
 import com.aluracursos.LiterAlura.ui.ValidarEntrada;
 import com.aluracursos.LiterAlura.util.IdiomaUtil;
 import com.aluracursos.LiterAlura.util.PrintUtil;
-import jakarta.transaction.Transactional;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static com.aluracursos.LiterAlura.util.Constantes.URL_API;
 import static com.aluracursos.LiterAlura.util.StyleAnsi.*;
@@ -83,7 +84,6 @@ public class LibroService {
     }
 
     //  M. - Muestra la lista de libros guardados en la DB
-    @Transactional
     public void MostrarLibrosGuardados() {
         librosGuardados = libroRepository.findAllConAutores();
         if (librosGuardados.isEmpty()) {
@@ -94,7 +94,6 @@ public class LibroService {
     }
 
     //  M. - Lista los libros existentes de la DB po idioma
-    @Transactional
     public void ListarLibrosPorIdioma() {
         List<String> idiomas = libroRepository.findAllIdiomas();
 
@@ -106,7 +105,7 @@ public class LibroService {
         System.out.println("\n\t🌎 Idiomas disponibles:");
         for (int i = 0; i < idiomas.size(); i++) {
             System.out.printf(AMARILLO + "\t\t%d) " + MAGENTA
-                    + IdiomaUtil.obtenerBanderaPorIdioma(idiomas.get(i))+ "\n", i + 1);
+                    + IdiomaUtil.obtenerBanderaPorIdioma(idiomas.get(i)) + "\n", i + 1);
         }
 
         String msg = AMARILLO + "\t\tSeleccione un idioma: ";
@@ -118,7 +117,38 @@ public class LibroService {
                 + VERDE + IdiomaUtil.obtenerBanderaPorIdioma(idiomaSeleccionado)
                 + AMARILLO + ":\n");
         libros.forEach(libro ->
-                System.out.println( VERDE + "\t\t - " + RESET + libro.getTitulo())
+                System.out.println(VERDE + "\t\t - " + RESET + libro.getTitulo())
         );
+    }
+
+    //  M. - Lista los top 10 libros de gutendex y DB
+    public void MostrarTop10Libros() {
+        System.out.println(AMARILLO + "\t1) Top 10 libros Gutendex \n\t2) Top 10 libros registrados");
+        String msg = "\n\tSeleccione una opcion: ";
+        int opc = validarEntrada.OpcionAValidar(msg, 2);
+
+        if (opc == 1) {
+            var json = consumoAPI.ObtenerDatos(URL_API);
+            var datos = conversor.obtenerDatos(json, DatosResponse.class);
+            //Top 10 libros más descargados gutendex
+            List<LibroT> top10 = datos.libros().stream()
+                    .sorted(Comparator.comparing(LibroRes::numeroDeDescargas).reversed())
+                    .limit(10)
+                    .map(LibroT::new) // ya inyecta autores
+                    .collect(Collectors.toList());
+
+            top10.forEach(libro -> System.out.println(PrintUtil.imprimirLibro(libro)));
+
+        } else {
+            //Top 10 libros más descargados DB
+            librosGuardados = libroRepository.obtenerTop10Libros();
+            if (librosGuardados.isEmpty()) {
+                System.out.println(ROJO + "\t\t❗❗ Aún no hay libros registrados.\n\t\t🧐 Ingrese un primer libro👍👍");
+                return;
+            }
+            AtomicInteger contador = new AtomicInteger(1);
+            librosGuardados.forEach(libroT ->
+                    System.out.println("\t\t" + VERDE + contador.getAndIncrement() + ".-\n" + PrintUtil.imprimirLibro(libroT)));
+        }
     }
 }

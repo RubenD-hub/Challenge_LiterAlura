@@ -60,6 +60,9 @@ public class Principal {
                 case 6:
                     libroService.ListarLibrosPorIdioma();
                     break;
+                case 7:
+                    libroService.MostrarTop10Libros();
+                    break;
             }
 
             //  Rompe el bucle por seleccionar la opción salir

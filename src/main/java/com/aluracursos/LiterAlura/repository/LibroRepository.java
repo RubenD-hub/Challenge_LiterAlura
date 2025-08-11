@@ -23,4 +23,8 @@ public interface LibroRepository extends JpaRepository<LibroT, Long> {
     // 🔹 Si quieres traer todos los libros por idioma
     @Query("SELECT DISTINCT l FROM LibroT l JOIN l.idiomas i WHERE i = :idioma")
     List<LibroT> findLibrosByIdioma(String idioma);
+
+    // 🔹 Si quieres traer el top 10 libros
+    @Query("SELECT DISTINCT l FROM LibroT l LEFT JOIN FETCH l.autor LEFT JOIN FETCH l.idiomas ORDER BY l.numeroDeDescarga DESC LIMIT 10")
+    List<LibroT> obtenerTop10Libros();
 }

@@ -4,10 +4,7 @@ import com.aluracursos.LiterAlura.model.AutorT;
 import com.aluracursos.LiterAlura.repository.AutorRepository;
 import com.aluracursos.LiterAlura.ui.ValidarEntrada;
 import com.aluracursos.LiterAlura.util.PrintUtil;
-import jakarta.transaction.Transactional;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import static com.aluracursos.LiterAlura.util.StyleAnsi.*;
@@ -27,7 +24,6 @@ public class AutorService {
     }
 
     //  M. - Muestra la lista de autores guardados en la DB
-    @Transactional
     public void MostrarAutoresGuardados() {
         autoresGuardados = autorRepository.findAllConLibros();
         if (autoresGuardados.isEmpty()) {
@@ -38,7 +34,6 @@ public class AutorService {
     }
 
     //  M. - Lista los autores vivos en cierto año
-    @Transactional
     public void AutoresVivosYear() {
         autoresGuardados = autorRepository.findAllConLibros();
         if (autoresGuardados.isEmpty()) {

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.OptionalDouble;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "libros")
@@ -37,6 +38,16 @@ public class LibroT {
         this.titulo = libroRes.titulo();
         this.idiomas = new HashSet<>(libroRes.idiomas());
         this.numeroDeDescarga = OptionalDouble.of(libroRes.numeroDeDescargas()).orElse(0);
+
+        if (libroRes.autores() != null) {
+            Set<AutorT> autoresSet = libroRes.autores().stream()
+                    .map(a -> {
+                        AutorT autor = new AutorT(a); // usa el constructor AutorT(AutorRes)
+                        autor.getLibros().add(this); // mantiene relación bidireccional
+                        return autor;
+                    }).collect(Collectors.toSet());
+            this.autor = autoresSet;
+        }
     }
 
     //  Getters and Setters
