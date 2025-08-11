@@ -92,6 +92,7 @@ git clone  https://github.com/RubenD-hub/Challenge_LiterAlura.git
 ```
 2. Abrir el repositorio con el IDE preferido.
 3. Tener configurado las credenciales de la base de datos
+   
    <img src="img/img2.PNG" alt="Configuracion Base de datos" width="400">
 4. Compilar y ejecutar el proyecto.
 
@@ -108,6 +109,7 @@ Al ejecutar la aplicacion, lo primero que podemos encontrar es un menu principal
 #### ❌ Salir
 
 La última opcion `Salir` termina la ejecucioin de la aplicacion.
+
 <img src="img/img-salir.PNG" alt="Menu principal" width="300">
 
 ### 🚓Excepciones y contramedidas
