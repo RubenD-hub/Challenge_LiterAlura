@@ -151,4 +151,34 @@ public class LibroService {
                     System.out.println("\t\t" + VERDE + contador.getAndIncrement() + ".-\n" + PrintUtil.imprimirLibro(libroT)));
         }
     }
+
+    //  M. - Muestra las estadisticas por idioma
+    public void mostrarEstadisticasPorIdioma() {
+        librosGuardados = libroRepository.findAllConAutores();
+        if (librosGuardados.isEmpty()) {
+            System.out.println(ROJO + "\t\t❗❗ Aún no hay libros registrados.\n\t\t🧐 Ingrese un primer libro👍👍");
+            return;
+        }
+
+        var estadisticasPorIdioma = librosGuardados.stream()
+                .flatMap(libro -> libro.getIdiomas().stream()
+                        .map(idioma -> Map.entry(idioma, libro.getNumeroDeDescarga())))
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getKey, // idioma individual
+                        Collectors.summarizingDouble(Map.Entry::getValue)
+                ));
+
+        System.out.println(AMARILLO + "\n\t\t📈 Estadísticas de Descargas por Idioma" + RESET);
+
+
+        estadisticasPorIdioma.forEach((idioma, stats) -> {
+            System.out.println(VERDE + "------------------------------------------" + RESET);
+            System.out.println(VERDE + "🔮 Idioma: " + RESET + IdiomaUtil.obtenerBanderaPorIdioma(idioma));
+            System.out.println(VERDE + "  📚 Cantidad de Libros: " + RESET + stats.getCount());
+            System.out.println(VERDE + "  📊 Promedio de Descargas: " + RESET + String.format("%.2f", stats.getAverage()));
+            System.out.println(VERDE + "  📉 Mínimo de Descargas: " + RESET + (int) stats.getMin());
+            System.out.println(VERDE + "  📈 Máximo de Descargas: " + RESET + (int) stats.getMax());
+            System.out.println(VERDE + "------------------------------------------" + RESET);
+        });
+    }
 }

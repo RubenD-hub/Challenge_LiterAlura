@@ -63,6 +63,9 @@ public class Principal {
                 case 7:
                     libroService.MostrarTop10Libros();
                     break;
+                case 8:
+                    libroService.mostrarEstadisticasPorIdioma();
+                    break;
             }
 
             //  Rompe el bucle por seleccionar la opción salir
