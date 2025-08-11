@@ -9,7 +9,7 @@
   <h1>📚Challenge: LiterAlura 📚➡💻</h1> 
   <p>
     Proyecto catálogo de libros mediante la consulta de API y la persistencia de los datos en una base 
-    de datos, esta aplicación nos permitirá la consulta de libros y su información, artistas y sus 
+    de datos, esta aplicación nos permitirá la consulta de libros y su información, escritores y sus 
     obras, entre otras funcionalidades.
   </p>
 </div>
@@ -56,6 +56,7 @@ Otras funcionalidades que ofrece la aplicacion son:
 - Listar autores registrados
 - Listar autores vivos en un determinado año
 - listar libros por idioma
+- otras.
 
 ---
 
@@ -79,31 +80,35 @@ Su construcción fue mediante las siguientes herramientas:
 - Conexión a internet para consultar la API.
 - Spring 3.5.4
 - Tener instalado Postgres 16 en adelante.
+- Ademas de haber creado una base de datos con el nombre `LiterAlura`
+  <img src="img/img1.PNG" alt="Base de datos" width="400">
+
 
 ### 🔢 Pasos
 
 1. Descargar o clonar este repositorio.
-
-   ``
-
+```bash
+git clone  https://github.com/RubenD-hub/Challenge_LiterAlura.git
+```
 2. Abrir el repositorio con el IDE preferido.
-3. Compilar y ejecutar el proyecto.
+3. Tener configurado las credenciales de la base de datos
+   <img src="img/img2.PNG" alt="Configuracion Base de datos" width="400">
+4. Compilar y ejecutar el proyecto.
 
 ## 🛶Funcionamiento
 
 En el siguiente GIF podemos ver el funcionamiento principal de la apliccaion.
-
-<img src="img/" alt="Funcionamiento" width="500">
+<img src="img/Funcionamiento.gif" alt="Funcionamiento" width="500">
 
 ### ✅ Menu principal
 
 Al ejecutar la aplicacion, lo primero que podemos encontrar es un menu principal con opciones.
-
-<img src="img/" alt="Menu principal" width="300">
+<img src="img/img3.PNG" alt="Menu principal" width="300">
 
 #### ❌ Salir
 
 La última opcion `Salir` termina la ejecucioin de la aplicacion.
+<img src="img/img-salir.PNG" alt="Menu principal" width="300">
 
 ### 🚓Excepciones y contramedidas
 
@@ -112,15 +117,14 @@ lo que provocaria posibles fallas.
 
 1. Ingresar opciones no disponibles.
 2. Valores negativos.
-3. Ingresar otro tipo de datos (letras).
+3. Ingresar otro tipo de datos (letras) en las opciones de validar numero.
 
 ## Roadmap
 
-En esta primera version, se logró el objetivo de la aplicacion de conversion de divisas y la conservacion del historial
-de conversiones.
-Pero aún se puede tener mejoras futuras:
+El proyecto `LiterAluura` aún ofrece posible mejoras:
 
-- [x] 
+- [ ] Una mejor presentacion, app web
+- [ ] Enlazar alguna ilustracion
 
 <p align="right"><a href="#readme-top">regresar al inicio</a></p>
 
@@ -131,3 +135,4 @@ Pero aún se puede tener mejoras futuras:
 [Alura]:https://custom-icon-badges.demolab.com/badge/Alura-001332?logo=alura-white&logoColor=fff
 [Spring Boot]:https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=fff
 [Postgres]:https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white
+
