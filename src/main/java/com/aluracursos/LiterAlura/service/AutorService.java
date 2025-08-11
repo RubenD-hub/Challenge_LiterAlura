@@ -46,7 +46,13 @@ public class AutorService {
                 .forEach(AutorT -> System.out.println(PrintUtil.imprimirAutor(AutorT)));
     }
 
+    //  M. - Busca el autor por nombre
     public void buscarAutorPorNombre() {
+        autoresGuardados = autorRepository.findAllConLibros();
+        if (autoresGuardados.isEmpty()) {
+            System.out.println(ROJO + "\t\t❗❗ Aún no hay autores registrados.\n\t\t🧐 Ingrese un primer libro👍👍");
+            return;
+        }
         System.out.print(AMARILLO+"\tIngrese el nombre del autor a buscar: ");
         var nombreAutor = scan.nextLine();
 
